@@ -3,6 +3,10 @@ package dev.coms4156.project.individualproject;
 import java.io.Serial;
 import java.io.Serializable;
 
+/**
+ * Represents a course. This class stores information about the location of course, name of the
+ * instructor, time slot of course, enrollment capacity, and number of students enrolled.
+ */
 public class Course implements Serializable {
 
   /**
@@ -53,6 +57,11 @@ public class Course implements Serializable {
     return this.courseTimeSlot;
   }
 
+  /**
+   * Returns String Representation of the object.
+   *
+   * @return provides course instructor name, course location and course time slot .
+   */
   public String toString() {
     return "\nInstructor: "
         + instructorName
