@@ -14,7 +14,7 @@ Course.java:
 Department.java
 9)getNumberOfMajors() return negative of numberOfMajors
 10)getDepartmentChair() returns the string "this.departmentChair" instead of the department chair
-11)dropPersonFromMajor() fails to check as per doc if number of ,majors is positive
+11)dropPersonFromMajor() fails to check as per doc if number of majors is positive
 12)this keyword missing in some places when calling class variables :
 create Course doesn't use this to call addCourse
 addCourse() doesn't use this for courses
