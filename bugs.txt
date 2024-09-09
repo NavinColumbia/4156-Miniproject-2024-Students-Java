@@ -1,0 +1,50 @@
+identified and fixed bugs:
+
+Course.java:
+1)enrolledStudentCount should be initialized to 0 , not 500 in Course.java
+2)enrollStudent() should check if max capacity has already been reached and return false if it has reached and true otherwise.
+3)dropStudent() must check if current student count is positive , and return true if so , false otherise
+4)getCourseLocation() returns instructor by mistake
+5)getInstructorName() returns course location
+6)isCourseFull() returns true if course is not full, it should be the other way around
+7)this key word missing in enrollStudent(),dropStudent() and toString()
+8)@Override annotation missing in toString()
+
+
+Department.java
+9)getNumberOfMajors() return negative of numberOfMajors
+10)getDepartmentChair() returns the string "this.departmentChair" instead of the department chair
+11)dropPersonFromMajor() fails to check as per doc if number of ,majors is positive
+12)this keyword missing in some places when calling class variables :
+create Course doesn't use this to call addCourse
+addCourse() doesn't use this for courses
+numberOfMajors needs this keyword in addPersonToMajor() and dropPersonFromMajor()
+this.deptCode in to String()
+13)"result.toString()" is returned instead of result.toString()
+14)@Override annotation missing in toString()
+
+MyFileDatabase.java
+15)missing this keyword for departmentMapping and filepath
+
+
+IndividualProjectApplication.java
+16)run method doesn't have @Override
+
+RouteController.java
+17)"value=" missing in GetMapping of index
+18)http status code for first should be not found , for second should be ok in if (!departmentMapping.containsKey(deptCode.toUpperCase())) {
+           return new ResponseEntity<>("Department Not Found", HttpStatus.OK);
+         } else {
+           return new ResponseEntity<>(
+               departmentMapping.get(deptCode.toUpperCase()).toString(), HttpStatus.NOT_FOUND);
+         }
+ 19)when retrieveCourse is successful return status is HttpStatus.FORBIDDEN
+ 20)getMajorCtFromDept returns -departmentMapping.get(deptCode).getNumberOfMajors()
+ 21)HttpStatus.FORBIDDEN returned when dept not found
+ 22)findCourseTime returns "some time " instead of actual time
+ 23)handleException returns HttpStatus.OK
+
+
+
+
+
