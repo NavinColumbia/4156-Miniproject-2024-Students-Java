@@ -50,6 +50,7 @@ public class IndividualProjectApplicationTest {
           testob.resetDataFile();
         });
   }
+
   @Test
   public void terminate() {
     assertAll(
@@ -57,13 +58,15 @@ public class IndividualProjectApplicationTest {
           testob.onTermination();
         });
   }
+
   @Test
   public void overridetest() {
     assertAll(
         () -> {
-          testob.overrideDatabase(new MyFileDatabase(0,"./data.txt"));
+          testob.overrideDatabase(new MyFileDatabase(0, "./data.txt"));
         });
   }
+
   @Test
   public void runtest() {
     assertAll(
@@ -72,9 +75,6 @@ public class IndividualProjectApplicationTest {
         });
   }
 
-
-  //onTermination()
-
-
+  // onTermination()
 
 }

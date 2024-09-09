@@ -61,12 +61,10 @@ public class CourseTest {
   @Test
   public void enrollTest() {
 
-
-      testCourse1.setEnrolledStudentCount(500);
+    testCourse1.setEnrolledStudentCount(500);
 
     assertEquals(false, testCourse1.enrollStudent());
   }
-
 
   @Test
   public void enrollTest2() {
@@ -75,9 +73,9 @@ public class CourseTest {
 
     assertEquals(true, testCourse2.enrollStudent());
   }
+
   @Test
   public void isFullTest() {
-
 
     testCourse1.setEnrolledStudentCount(500);
 
@@ -87,22 +85,16 @@ public class CourseTest {
   @Test
   public void isFullTest2() {
 
-
     testCourse2.setEnrolledStudentCount(100);
 
     assertEquals(false, testCourse2.isCourseFull());
   }
 
-
-
-
   @Test
   public void dropTest() {
-   // testCourse1.setEnrolledStudentCount(500);
-    for(int i=0;i<500;i++)
-    {
+    // testCourse1.setEnrolledStudentCount(500);
+    for (int i = 0; i < 500; i++) {
       testCourse1.enrollStudent();
-
     }
     assertEquals(true, testCourse1.dropStudent());
   }
@@ -114,8 +106,6 @@ public class CourseTest {
 
     assertEquals(false, testCourse2.dropStudent());
   }
-
-
 
   /** The test course instance used for testing. */
   public static Course testCourse1;

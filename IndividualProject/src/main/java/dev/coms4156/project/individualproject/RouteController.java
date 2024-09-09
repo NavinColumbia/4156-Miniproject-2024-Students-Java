@@ -8,13 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /** This class contains all the API routes for the system. */
 @RestController
 public class RouteController {
-  Logger logger= LoggerFactory.getLogger(RouteController.class);
   /**
    * Redirects to the homepage.
    *
@@ -97,7 +94,6 @@ public class RouteController {
    * @return A {@code ResponseEntity} object containing either the requested information and an HTTP
    *     200 response or, an appropriate message indicating the proper response.
    */
-
   @GetMapping(value = "/isCourseFull", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> isCourseFull(
       @RequestParam(value = "deptCode") String deptCode,
@@ -524,4 +520,3 @@ public class RouteController {
     return new ResponseEntity<>("An Error has occurred", HttpStatus.BAD_REQUEST);
   }
 }
-

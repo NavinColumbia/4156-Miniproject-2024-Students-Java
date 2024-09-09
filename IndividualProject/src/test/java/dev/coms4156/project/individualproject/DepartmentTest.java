@@ -39,7 +39,7 @@ public class DepartmentTest {
     } catch (IOException | ClassNotFoundException e) {
       e.printStackTrace();
     }
-     testDept2 = new Department("RAND", new HashMap<>(), "randchair", 0);
+    testDept2 = new Department("RAND", new HashMap<>(), "randchair", 0);
     testDept2.createCourse("id", "instructor", "location", "time", 5);
   }
 
