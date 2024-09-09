@@ -8,17 +8,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /** This class contains all the API routes for the system. */
 @RestController
 public class RouteController {
-
+  Logger logger= LoggerFactory.getLogger(RouteController.class);
   /**
    * Redirects to the homepage.
    *
    * @return A String containing the name of the html file to be loaded.
    */
-  @GetMapping({"/", "/index", "/home"})
+  @GetMapping(value = {"/", "/index", "/home"})
   public String index() {
     return "Welcome, in order to make an API call direct your browser or Postman to an endpoint "
         + "\n\n This can be done using the following format: \n\n http:127.0.0"
@@ -39,13 +41,14 @@ public class RouteController {
       departmentMapping = IndividualProjectApplication.myFileDatabase.getDepartmentMapping();
 
       if (!departmentMapping.containsKey(deptCode.toUpperCase())) {
-        return new ResponseEntity<>("Department Not Found", HttpStatus.OK);
+        return new ResponseEntity<>("Department Not Found", HttpStatus.NOT_FOUND);
       } else {
         return new ResponseEntity<>(
-            departmentMapping.get(deptCode.toUpperCase()).toString(), HttpStatus.NOT_FOUND);
+            departmentMapping.get(deptCode.toUpperCase()).toString(), HttpStatus.OK);
       }
 
     } catch (Exception e) {
+
       return handleException(e);
     }
   }
@@ -76,7 +79,7 @@ public class RouteController {
           return new ResponseEntity<>("Course Not Found", HttpStatus.NOT_FOUND);
         } else {
           return new ResponseEntity<>(
-              coursesMapping.get(Integer.toString(courseCode)).toString(), HttpStatus.FORBIDDEN);
+              coursesMapping.get(Integer.toString(courseCode)).toString(), HttpStatus.OK);
         }
       }
       return new ResponseEntity<>("Department Not Found", HttpStatus.NOT_FOUND);
@@ -94,6 +97,7 @@ public class RouteController {
    * @return A {@code ResponseEntity} object containing either the requested information and an HTTP
    *     200 response or, an appropriate message indicating the proper response.
    */
+
   @GetMapping(value = "/isCourseFull", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> isCourseFull(
       @RequestParam(value = "deptCode") String deptCode,
@@ -137,11 +141,11 @@ public class RouteController {
         departmentMapping = IndividualProjectApplication.myFileDatabase.getDepartmentMapping();
         return new ResponseEntity<>(
             "There are: "
-                + -departmentMapping.get(deptCode).getNumberOfMajors()
+                + departmentMapping.get(deptCode).getNumberOfMajors()
                 + " majors in the department",
             HttpStatus.OK);
       }
-      return new ResponseEntity<>("Department Not Found", HttpStatus.FORBIDDEN);
+      return new ResponseEntity<>("Department Not Found", HttpStatus.NOT_FOUND);
     } catch (Exception e) {
       return handleException(e);
     }
@@ -272,7 +276,8 @@ public class RouteController {
         coursesMapping = departmentMapping.get(deptCode).getCourseSelection();
 
         Course requestedCourse = coursesMapping.get(Integer.toString(courseCode));
-        return new ResponseEntity<>("The course meets at: " + "some time ", HttpStatus.OK);
+        return new ResponseEntity<>(
+            "The course meets at: " + requestedCourse.getCourseTimeSlot(), HttpStatus.OK);
       } else {
         return new ResponseEntity<>("Course Not Found", HttpStatus.NOT_FOUND);
       }
@@ -516,6 +521,7 @@ public class RouteController {
 
   private ResponseEntity<?> handleException(Exception e) {
     System.out.println(e.toString());
-    return new ResponseEntity<>("An Error has occurred", HttpStatus.OK);
+    return new ResponseEntity<>("An Error has occurred", HttpStatus.BAD_REQUEST);
   }
 }
+

@@ -22,7 +22,7 @@ public class Course implements Serializable {
     this.instructorName = instructorName;
     this.courseTimeSlot = timeSlot;
     this.enrollmentCapacity = capacity;
-    this.enrolledStudentCount = 500;
+    this.enrolledStudentCount = 0;
   }
 
   /**
@@ -31,8 +31,11 @@ public class Course implements Serializable {
    * @return true if the student is successfully enrolled, false otherwise.
    */
   public boolean enrollStudent() {
-    enrolledStudentCount++;
-    return false;
+    if (this.enrolledStudentCount >= this.enrollmentCapacity) {
+      return false;
+    }
+    this.enrolledStudentCount++;
+    return true;
   }
 
   /**
@@ -41,16 +44,19 @@ public class Course implements Serializable {
    * @return true if the student is successfully dropped, false otherwise.
    */
   public boolean dropStudent() {
-    enrolledStudentCount--;
-    return false;
+    if (this.enrolledStudentCount <= 0) {
+      return false;
+    }
+    this.enrolledStudentCount--;
+    return true;
   }
 
   public String getCourseLocation() {
-    return this.instructorName;
+    return this.courseLocation;
   }
 
   public String getInstructorName() {
-    return this.courseLocation;
+    return this.instructorName;
   }
 
   public String getCourseTimeSlot() {
@@ -62,13 +68,14 @@ public class Course implements Serializable {
    *
    * @return provides course instructor name, course location and course time slot .
    */
+  @Override
   public String toString() {
     return "\nInstructor: "
-        + instructorName
+        + this.instructorName
         + "; Location: "
-        + courseLocation
+        + this.courseLocation
         + "; Time: "
-        + courseTimeSlot;
+        + this.courseTimeSlot;
   }
 
   public void reassignInstructor(String newInstructorName) {
@@ -88,7 +95,7 @@ public class Course implements Serializable {
   }
 
   public boolean isCourseFull() {
-    return enrollmentCapacity > enrolledStudentCount;
+    return enrollmentCapacity <= enrolledStudentCount;
   }
 
   @Serial private static final long serialVersionUID = 123456L;

@@ -6,7 +6,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
 /**
  * Class contains all the startup logic for the application.
  *
@@ -32,6 +31,7 @@ public class IndividualProjectApplication implements CommandLineRunner {
    *
    * @param args A {@code String[]} of any potential runtime args
    */
+  @Override
   public void run(String[] args) {
     for (String arg : args) {
       if (arg.equals("setup")) {
