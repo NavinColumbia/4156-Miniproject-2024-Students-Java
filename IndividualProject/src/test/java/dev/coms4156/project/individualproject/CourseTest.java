@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,10 +27,10 @@ public class CourseTest {
     String filePath = "./data.txt";
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filePath))) {
       Object obj = in.readObject();
-      if (obj instanceof HashMap) {
-        departmentMapping = (HashMap<String, Department>) obj;
+      if (obj instanceof Map) {
+        departmentMapping = (Map<String, Department>) obj;
         String testDeptCode = "COMS";
-        HashMap<String, Course> coursesMapping =
+        Map<String, Course> coursesMapping =
             departmentMapping.get(testDeptCode).getCourseSelection();
         testCourse2 = coursesMapping.get("1004");
       } else {
@@ -110,5 +110,5 @@ public class CourseTest {
   public static Course testCourse2;
 
   /** This will be a mapping retrieved from data,txt. */
-  public static HashMap<String, Department> departmentMapping;
+  public static Map<String, Department> departmentMapping;
 }

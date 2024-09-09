@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,7 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
 public class DepartmentTest {
 
   /** This will be a mapping retrieved from data,txt. */
-  public static HashMap<String, Department> departmentMapping;
+  public static Map<String, Department> departmentMapping;
 
   /** This is a testcase from data.txt. */
   public static Department testDept;
@@ -35,8 +36,8 @@ public class DepartmentTest {
     String filePath = "./data.txt";
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filePath))) {
       Object obj = in.readObject();
-      if (obj instanceof HashMap) {
-        departmentMapping = (HashMap<String, Department>) obj;
+      if (obj instanceof Map) {
+        departmentMapping = (Map<String, Department>) obj;
         String testDeptCode = "COMS";
         testDept = departmentMapping.get(testDeptCode);
 
@@ -47,7 +48,7 @@ public class DepartmentTest {
       e.printStackTrace();
     }
     testDept2 = new Department("RAND", new HashMap<>(), "randchair", 0);
-    testDept2.createCourse("id", "instructor", "location", "time", 5);
+    testDept2.createCourse("id", "instructor", locations[0], times[0], 5);
   }
 
   @Test

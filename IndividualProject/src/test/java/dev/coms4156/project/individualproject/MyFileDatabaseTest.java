@@ -2,6 +2,7 @@ package dev.coms4156.project.individualproject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.HashMap;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -286,6 +287,6 @@ public class MyFileDatabaseTest {
 
   @Test
   public void wrongInput() {
-    assertEquals(null, testdb3.deSerializeObjectFromFile());
+    assertEquals(new HashMap<String, Department>(), testdb3.deSerializeObjectFromFile());
   }
 }
