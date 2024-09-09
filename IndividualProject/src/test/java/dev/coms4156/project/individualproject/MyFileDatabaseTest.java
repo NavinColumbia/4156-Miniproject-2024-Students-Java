@@ -1,24 +1,27 @@
 package dev.coms4156.project.individualproject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.io.IOException;
-import java.util.HashMap;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
-/** This class is for testing purposes. */
+/** Takes Care of testing methods in MyFileDatabaseTest Class. */
 @SpringBootTest
 @ContextConfiguration
 public class MyFileDatabaseTest {
-  public static HashMap<String, Department> departmentMapping;
+
+  /** This will be a test object from existing data.txt. */
   public static MyFileDatabase testdb1;
+
+  /** This will be a test object wherein data will be created (using testdb1). */
   public static MyFileDatabase testdb2;
+
+  /** This will be a test object that demonstrates handling corrupt data. */
   public static MyFileDatabase testdb3;
 
+  /** sets the three variables as above mentioned. */
   @BeforeAll
   public static void setupDbForTesting() {
     testdb1 = new MyFileDatabase(0, "./data.txt");

@@ -1,21 +1,5 @@
 package dev.coms4156.project.individualproject;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.io.IOException;
-import java.util.HashMap;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.RequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
@@ -23,6 +7,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.MockMvc;
+
+/** This class contains all the API routes for the system. */
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(RouteController.class)
 public class RouteControllerTest {
@@ -205,7 +197,7 @@ public class RouteControllerTest {
   }
 
   @Test
-  void testNAN() throws Exception {
+  void testNotFound() throws Exception {
     mvc.perform(get("/retrieveDept?deptCode=C")).andExpect(status().isNotFound());
     mvc.perform(get("/retrieveCourse?deptCode=COMS&courseCode=1")).andExpect(status().isNotFound());
     mvc.perform(get("/isCourseFull?deptCode=COMS&courseCode=1")).andExpect(status().isNotFound());
@@ -226,10 +218,7 @@ public class RouteControllerTest {
         .andExpect(status().isNotFound());
     mvc.perform(patch("/changeCourseTeacher?deptCode=abc&courseCode=1&teacher=M"))
         .andExpect(status().isNotFound());
-    //  String expected ="Attributed was updated successfully.";
     mvc.perform(patch("/changeCourseLocation?deptCode=abc&courseCode=0&location=abc"))
         .andExpect(status().isNotFound());
-
-    // .andExpect(content().string(containsString(expected)));
   }
 }

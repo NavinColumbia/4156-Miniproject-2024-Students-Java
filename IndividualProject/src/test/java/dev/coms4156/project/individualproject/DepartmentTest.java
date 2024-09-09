@@ -11,14 +11,21 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
-/** This class is for testing purposes. */
+/** Takes Care of testing methods in Department Class. */
 @SpringBootTest
 @ContextConfiguration
 public class DepartmentTest {
+
+  /** This will be a mapping retrieved from data,txt. */
   public static HashMap<String, Department> departmentMapping;
+
+  /** This is a testcase from data.txt. */
   public static Department testDept;
+
+  /** This is a testcase created by calling constructor. */
   public static Department testDept2;
 
+  /** sets the three variables as above mentioned. */
   @BeforeAll
   public static void setupDeptForTesting() {
 
