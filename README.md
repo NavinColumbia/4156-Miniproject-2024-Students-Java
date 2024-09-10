@@ -17,6 +17,7 @@ Individual Assignment 1: Testing and Bug Fixing
                         ensure port 8080 is unoccupied
                         cd IndividualProject
                         mvn spring-boot:run -Dspring-boot.run.arguments="setup"
+                wait till "System Setup" shows up
                 cancel above/any applications running in port 8080 (press control+c)
                 now data.txt must exist in IndividualProject
 
@@ -61,6 +62,7 @@ Individual Assignment 1: Testing and Bug Fixing
                         cd IndividualProject
                         cancel any applications running in port 8080
                         mvn spring-boot:run 
+                        wait till "Start up" shows up
                         Test the application using Postman (https://www.postman.com/)
                         say, set URL to http://localhost:8080/retrieveCourse?deptCode=IEOR&courseCode=2500
                         select relevant method "GET" in this case, click Send and notice the result.
