@@ -1,48 +1,66 @@
-identified and fixed bugs:
-
-Course.java:
-1)enrolledStudentCount should be initialized to 0 , not 500 in Course.java
-2)enrollStudent() should check if max capacity has already been reached and return false if it has reached and true otherwise.
-3)dropStudent() must check if current student count is positive , and return true if so , false otherise
-4)getCourseLocation() returns instructor by mistake
-5)getInstructorName() returns course location
-6)isCourseFull() returns true if course is not full, it should be the other way around
-7)this key word missing in enrollStudent(),dropStudent() and toString()
-8)@Override annotation missing in toString()
+Identified and Fixed Bugs:
 
 
-Department.java
-9)getNumberOfMajors() return negative of numberOfMajors
-10)getDepartmentChair() returns the string "this.departmentChair" instead of the department chair
-11)dropPersonFromMajor() fails to check as per doc if number of majors is positive
-12)this keyword missing in some places when calling class variables :
-create Course doesn't use this to call addCourse
-addCourse() doesn't use this for courses
-numberOfMajors needs this keyword in addPersonToMajor() and dropPersonFromMajor()
-this.deptCode in to String()
-13)"result.toString()" is returned instead of result.toString()
-14)@Override annotation missing in toString()
 
-MyFileDatabase.java
-15)missing this keyword for departmentMapping and filepath
+A. Course.java
+
+1)enrolledStudentCount was initialized to 500, changed initialization to 0.
+2)enrollStudent() doesn't check max capacity, changed it to check if max capacity has already been reached and return false if it has reached and true otherwise.
+3)dropStudent() doesn't check student count, changed it to check if current student count is positive , and return true if so , false otherise.
+4)getCourseLocation() returns instructorName, changed it to return courseLocation.
+5)getInstructorName() returns course location, changed it to return instructorName.
+6)isCourseFull() returns true if course is not full, changed it to return true if full.
+7)this key word was missing in enrollStudent(),dropStudent() and toString(), added it.
+8)@Override annotation missing in toString(), added it.
 
 
-IndividualProjectApplication.java
-16)run method doesn't have @Override
 
-RouteController.java
-17)"value=" missing in GetMapping of index
-18)http status code for first should be not found , for second should be ok in if (!departmentMapping.containsKey(deptCode.toUpperCase())) {
-           return new ResponseEntity<>("Department Not Found", HttpStatus.OK);
-         } else {
-           return new ResponseEntity<>(
-               departmentMapping.get(deptCode.toUpperCase()).toString(), HttpStatus.NOT_FOUND);
-         }
- 19)when retrieveCourse is successful return status is HttpStatus.FORBIDDEN
- 20)getMajorCtFromDept returns -departmentMapping.get(deptCode).getNumberOfMajors()
- 21)HttpStatus.FORBIDDEN returned when dept not found
- 22)findCourseTime returns "some time " instead of actual time
- 23)handleException returns HttpStatus.OK
+B. Department.java
+
+9)getNumberOfMajors() return negative of numberOfMajors, changed it to return numberOfMajors
+10)getDepartmentChair() returns the string "this.departmentChair", changed it to return this.departmentChair
+11)dropPersonFromMajor() fails to check as per doc if number of majors is positive, added the check.
+12)this keyword missing when calling non-static class methods and variables. added them .
+    createCourse() doesn't use this to call addCourse
+    addCourse() doesn't use this for courses
+    numberOfMajors needs this keyword in addPersonToMajor() and dropPersonFromMajor()
+    toString() doesn't use this for deptCode 
+    added them.
+13)toString() returns "result.toString()", changed it to return result.toString().
+14)@Override annotation missing in toString(), added it.
+15)PMD: LooseCoupling:  Avoid using implementation types like 'HashMap'; use the interface instead. Replaced HashMap with with Map.
+
+
+
+C. MyFileDatabase.java
+
+16)added missing this keyword for non-static variables departmentMapping and filepath
+17)PMD: LooseCoupling:  Avoid using implementation types like 'HashMap'; use the interface instead. Replaced HashMap with Map.
+18)PMD: ReturnEmptyCollectionRatherThanNull:    Return an empty collection rather than null. in deSerializeObjectFromFile() :changed it to return new HashMap<>() instead of null.
+
+
+
+D. IndividualProjectApplication.java
+
+19)PMD: LooseCoupling:  Avoid using implementation types like 'HashMap'; use the interface instead. Replaced HashMap with Map.
+20)PMD: LiteralsFirstInComparisons:     Position literals first in String comparisons in run(). changed arg.equals("setup") to "setup".equals(arg)
+
+
+
+E. RouteController.java
+
+21)retrieveDepartment() : incorrect http status code returned .returns Ok if department is not found, returns not_found if department exists. Swapped return codes.
+22)retrieveCourse() : when retrieveCourse is successful return status is HttpStatus.FORBIDDEN, changed it to HttpStatus.OK.
+23)getMajorCtFromDept() : returns -departmentMapping.get(deptCode).getNumberOfMajors(), changed it by removing the negative sign.
+24)getMajorCtFromDept() : HttpStatus.FORBIDDEN is returned when dept not found, changed it to HttpStatus.NOT_FOUND.
+25)findCourseTime() : returns "some time". changed it to return requestedCourse.getCourseTimeSlot().
+26)handleException() : returns HttpStatus.OK. changed it to return HttpStatus.BAD_REQUEST.
+27)PMD: LooseCoupling:  Avoid using implementation types like 'HashMap'; use the interface instead. Replaced HashMap with Map;
+28)RetrieveDepartment() : 
+   PMD: UseLocaleWithCaseConversions:   When doing a String.toLowerCase()/toUpperCase() call, use a Locale 
+   Replaced deptCode.toUpperCase with deptCode.toUpperCase(Locale.ENGLISH)
+29)PMD: UnnecessaryAnnotationValueElement:      Avoid the use of value in annotations when its the only element. 
+   Removed all values, such as by Replacing "@RequestParam(value = "deptCode") String deptCode" with  "@RequestParam String deptCode"
 
 
 
