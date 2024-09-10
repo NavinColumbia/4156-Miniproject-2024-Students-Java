@@ -1,0 +1,33 @@
+Assignment Instructions :
+    https://courseworks2.columbia.edu/courses/203184/assignments/1283340
+Basic Repo Set Up:
+    Fork from https://github.com/Programming-Systems-Lab/4156-Miniproject-2024-Students-Java.git 
+
+Citations:
+1. Google Java Style Guide
+    https://google.github.io/styleguide/javaguide.html 
+    Provides guidelines on java styling.Referred for resolving style check warnings.
+2. How to Write Doc Comments for the Javadoc Tool
+    https://www.oracle.com/technical-resources/articles/java/javadoc-tool.html
+    Referred for writing javadoc comments
+3. Apache Maven Javadoc Plugin (mvn javadoc:javadoc)
+    https://maven.apache.org/plugins/maven-javadoc-plugin/ : 
+    Referred for generating HTML documentation site from the entered javadoc comments
+4. Spring Boot Testing Basics: How to Unit Test & Integration Test REST Controllers - Dan Vega
+    https://youtu.be/pNiRNRgi5Ws?si=L_YCY8DiO6_3xJxF 
+    Referred for testing 
+5. Spring Boot MockMvc Example with @WebMvcTest - Lokesh Gupta
+    https://howtodoinjava.com/spring-boot2/testing/spring-boot-mockmvc-example/ 
+    referred for testing 
+5. Spring Boot Testing a REST Controller with Unit, Integration & Acceptance Tests - Kris Foster
+   https://youtu.be/aEW8ZH6wj2o?si=43QV7ZYBY4IXRK8M
+   referred for testing 
+6. Junit documentation
+    https://junit.org/junit5/docs/5.0.1/api/org/junit/jupiter/api/Assertions.html - 
+    Referred for testing
+7. How to run Unit Tests with JaCoCo, Maven and IntelliJ IDEA - Begin Secure
+    https://youtu.be/AS7Akff7mzo?si=nU9VFEggaQ3w15bw
+    Referred for tutorial on Jacoco
+8. PMD Source Code Analyzer Project official Docs:
+    https://docs.pmd-code.org/latest/pmd_userdocs_cli_reference.html 
+    Referred to know command line arguments needed to generate pmd files

@@ -2,7 +2,6 @@ package dev.coms4156.project.individualproject;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -20,10 +19,7 @@ public class Department implements Serializable {
    * @param numberOfMajors The number of majors in the department.
    */
   public Department(
-      String deptCode,
-      HashMap<String, Course> courses,
-      String departmentChair,
-      int numberOfMajors) {
+      String deptCode, Map<String, Course> courses, String departmentChair, int numberOfMajors) {
     this.courses = courses;
     this.departmentChair = departmentChair;
     this.numberOfMajors = numberOfMajors;
@@ -36,7 +32,7 @@ public class Department implements Serializable {
    * @return The number of majors.
    */
   public int getNumberOfMajors() {
-    return -this.numberOfMajors;
+    return this.numberOfMajors;
   }
 
   /**
@@ -45,7 +41,7 @@ public class Department implements Serializable {
    * @return The name of the department chair.
    */
   public String getDepartmentChair() {
-    return "this.departmentChair";
+    return this.departmentChair;
   }
 
   /**
@@ -53,18 +49,21 @@ public class Department implements Serializable {
    *
    * @return A HashMap containing courses offered by the department.
    */
-  public HashMap<String, Course> getCourseSelection() {
+  public Map<String, Course> getCourseSelection() {
     return this.courses;
   }
 
   /** Increases the number of majors in the department by one. */
   public void addPersonToMajor() {
-    numberOfMajors++;
+    this.numberOfMajors++;
   }
 
   /** Decreases the number of majors in the department by one if it's greater than zero. */
   public void dropPersonFromMajor() {
-    numberOfMajors--;
+
+    if (this.numberOfMajors > 0) {
+      this.numberOfMajors--;
+    }
   }
 
   /**
@@ -74,7 +73,7 @@ public class Department implements Serializable {
    * @param course The Course object to add.
    */
   public void addCourse(String courseId, Course course) {
-    courses.put(courseId, course);
+    this.courses.put(courseId, course);
   }
 
   /**
@@ -93,7 +92,7 @@ public class Department implements Serializable {
       String courseTimeSlot,
       int capacity) {
     Course newCourse = new Course(instructorName, courseLocation, courseTimeSlot, capacity);
-    addCourse(courseId, newCourse);
+    this.addCourse(courseId, newCourse);
   }
 
   /**
@@ -101,9 +100,10 @@ public class Department implements Serializable {
    *
    * @return A string representing the department.
    */
+  @Override
   public String toString() {
     StringBuilder result = new StringBuilder();
-    for (Map.Entry<String, Course> entry : courses.entrySet()) {
+    for (Map.Entry<String, Course> entry : this.courses.entrySet()) {
       String key = entry.getKey();
       Course value = entry.getValue();
       result
@@ -114,12 +114,20 @@ public class Department implements Serializable {
           .append(value.toString())
           .append("\n");
     }
-    return "result.toString()";
+    return result.toString();
   }
 
   @Serial private static final long serialVersionUID = 234567L;
-  private HashMap<String, Course> courses;
+
+  /** All the courses at the department. */
+  private Map<String, Course> courses;
+
+  /** The department's chair. */
   private String departmentChair;
+
+  /** String that Represents the department. */
   private String deptCode;
+
+  /** Total number of majors in the department currently. */
   private int numberOfMajors;
 }

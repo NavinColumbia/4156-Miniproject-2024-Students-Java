@@ -8,16 +8,14 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * This class represents a file-based database containing department mappings.
- */
+/** This class represents a file-based database containing department mappings. */
 public class MyFileDatabase {
 
   /**
-   * Constructs a MyFileDatabase object and loads up the data structure with
-   * the contents of the file.
+   * Constructs a MyFileDatabase object and loads up the data structure with the contents of the
+   * file.
    *
-   * @param flag     used to distinguish mode of database
+   * @param flag used to distinguish mode of database
    * @param filePath the path to the file containing the entries of the database
    */
   public MyFileDatabase(int flag, String filePath) {
@@ -32,7 +30,7 @@ public class MyFileDatabase {
    *
    * @param mapping the mapping of department names to Department objects
    */
-  public void setMapping(HashMap<String, Department> mapping) {
+  public void setMapping(Map<String, Department> mapping) {
     this.departmentMapping = mapping;
   }
 
@@ -41,17 +39,17 @@ public class MyFileDatabase {
    *
    * @return the deserialized department mapping
    */
-  public HashMap<String, Department> deSerializeObjectFromFile() {
-    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filePath))) {
+  public Map<String, Department> deSerializeObjectFromFile() {
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(this.filePath))) {
       Object obj = in.readObject();
-      if (obj instanceof HashMap) {
-        return (HashMap<String, Department>) obj;
+      if (obj instanceof Map) {
+        return (Map<String, Department>) obj;
       } else {
         throw new IllegalArgumentException("Invalid object type in file.");
       }
     } catch (IOException | ClassNotFoundException e) {
       e.printStackTrace();
-      return null;
+      return new HashMap<>();
     }
   }
 
@@ -60,7 +58,7 @@ public class MyFileDatabase {
    * overwritten with this operation.
    */
   public void saveContentsToFile() {
-    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filePath))) {
+    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(this.filePath))) {
       out.writeObject(departmentMapping);
       System.out.println("Object serialized successfully.");
     } catch (IOException e) {
@@ -73,7 +71,7 @@ public class MyFileDatabase {
    *
    * @return the department mapping
    */
-  public HashMap<String, Department> getDepartmentMapping() {
+  public Map<String, Department> getDepartmentMapping() {
     return this.departmentMapping;
   }
 
@@ -85,7 +83,7 @@ public class MyFileDatabase {
   @Override
   public String toString() {
     StringBuilder result = new StringBuilder();
-    for (Map.Entry<String, Department> entry : departmentMapping.entrySet()) {
+    for (Map.Entry<String, Department> entry : this.departmentMapping.entrySet()) {
       String key = entry.getKey();
       Department value = entry.getValue();
       result.append("For the ").append(key).append(" department: \n").append(value.toString());
@@ -97,5 +95,5 @@ public class MyFileDatabase {
   private String filePath;
 
   /** The mapping of department names to Department objects. */
-  private HashMap<String, Department> departmentMapping;
+  private Map<String, Department> departmentMapping;
 }
