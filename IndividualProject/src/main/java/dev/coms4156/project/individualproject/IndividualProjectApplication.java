@@ -291,7 +291,9 @@ public class IndividualProjectApplication implements CommandLineRunner {
     }
   }
 
-  // Database Instance
+  /** Database Instance. */
   public static MyFileDatabase myFileDatabase;
+
+  /** Content saved to file if set to true . */
   private static boolean saveData = true;
 }

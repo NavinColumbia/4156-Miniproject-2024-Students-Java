@@ -25,9 +25,9 @@ public class MyFileDatabaseTest {
   /** sets the three variables as above mentioned. */
   @BeforeAll
   public static void setupDbForTesting() {
-    testdb1 = new MyFileDatabase(0, "./data.txt");
-    testdb2 = new MyFileDatabase(1, "./data_test.txt");
-    testdb3 = new MyFileDatabase(0, "./data_corrupt.txt");
+    testdb1 = new MyFileDatabase(0, "./src/test/resources/data.txt");
+    testdb2 = new MyFileDatabase(1, "./src/test/resources/data_test.txt");
+    testdb3 = new MyFileDatabase(0, "./src/test/resources/data_corrupt.txt");
   }
 
   @Test

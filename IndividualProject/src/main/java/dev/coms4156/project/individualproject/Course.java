@@ -51,14 +51,29 @@ public class Course implements Serializable {
     return true;
   }
 
+  /**
+   * Standard getter courseLocation.
+   *
+   * @return courseLocation.
+   */
   public String getCourseLocation() {
     return this.courseLocation;
   }
 
+  /**
+   * Standard getter for instructorName.
+   *
+   * @return instructorName.
+   */
   public String getInstructorName() {
     return this.instructorName;
   }
 
+  /**
+   * Standard getter for courseTimeSlot.
+   *
+   * @return courseTimeSlot.
+   */
   public String getCourseTimeSlot() {
     return this.courseTimeSlot;
   }
@@ -66,7 +81,7 @@ public class Course implements Serializable {
   /**
    * Returns String Representation of the object.
    *
-   * @return provides course instructor name, course location and course time slot .
+   * @return provides course instructor name, course location and course time slot.
    */
   @Override
   public String toString() {
@@ -78,30 +93,65 @@ public class Course implements Serializable {
         + this.courseTimeSlot;
   }
 
+  /**
+   * Standard Setter for instructorName.
+   *
+   * @param newInstructorName A {@code String} is the new instructor.
+   */
   public void reassignInstructor(String newInstructorName) {
     this.instructorName = newInstructorName;
   }
 
+  /**
+   * Standard Setter for courseLocation.
+   *
+   * @param newLocation A {@code String} is the new Location.
+   */
   public void reassignLocation(String newLocation) {
     this.courseLocation = newLocation;
   }
 
+  /**
+   * Standard Setter for courseTimeSlot.
+   *
+   * @param newTime A {@code String} is the new Time Slot.
+   */
   public void reassignTime(String newTime) {
     this.courseTimeSlot = newTime;
   }
 
+  /**
+   * Standard Setter for enrolledStudentCount.
+   *
+   * @param count A {@code int} is the new count.
+   */
   public void setEnrolledStudentCount(int count) {
     this.enrolledStudentCount = count;
   }
 
+  /**
+   * Checks if course is full.
+   *
+   * @return true if enrolledStudentCount is equal to or exceeds enrollmentCapacity.
+   */
   public boolean isCourseFull() {
     return enrollmentCapacity <= enrolledStudentCount;
   }
 
   @Serial private static final long serialVersionUID = 123456L;
+
+  /** Total number of students allowed to enroll in the course. */
   private final int enrollmentCapacity;
+
+  /** Number of students enrolled in the course. */
   private int enrolledStudentCount;
+
+  /** Location of the course. */
   private String courseLocation;
+
+  /** Name of Course Instructor. */
   private String instructorName;
+
+  /** Time Slot of the course . */
   private String courseTimeSlot;
 }

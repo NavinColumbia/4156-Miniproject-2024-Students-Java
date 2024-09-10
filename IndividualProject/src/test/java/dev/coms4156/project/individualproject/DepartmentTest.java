@@ -33,7 +33,7 @@ public class DepartmentTest {
     String[] times = {"11:40-12:55", "4:10-5:25", "10:10-11:25", "2:40-3:55"};
     String[] locations = {"417 IAB", "309 HAV", "301 URIS"};
 
-    String filePath = "./data.txt";
+    String filePath = "./src/test/resources/data.txt";
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filePath))) {
       Object obj = in.readObject();
       if (obj instanceof Map) {

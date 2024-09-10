@@ -118,8 +118,16 @@ public class Department implements Serializable {
   }
 
   @Serial private static final long serialVersionUID = 234567L;
+
+  /** All the courses at the department. */
   private Map<String, Course> courses;
+
+  /** The department's chair. */
   private String departmentChair;
+
+  /** String that Represents the department. */
   private String deptCode;
+
+  /** Total number of majors in the department currently. */
   private int numberOfMajors;
 }

@@ -24,7 +24,7 @@ public class CourseTest {
 
     testCourse1 = new Course("Adam Cannon", locations[0], times[0], 400);
 
-    String filePath = "./data.txt";
+    String filePath = "./src/test/resources/data.txt";
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filePath))) {
       Object obj = in.readObject();
       if (obj instanceof Map) {

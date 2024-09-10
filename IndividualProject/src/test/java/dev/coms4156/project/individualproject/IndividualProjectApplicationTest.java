@@ -55,7 +55,7 @@ public class IndividualProjectApplicationTest {
   public void overridetest() {
     assertAll(
         () -> {
-          testob.overrideDatabase(new MyFileDatabase(0, "./data.txt"));
+          testob.overrideDatabase(new MyFileDatabase(0, "./src/test/resources/data.txt"));
         });
   }
 
