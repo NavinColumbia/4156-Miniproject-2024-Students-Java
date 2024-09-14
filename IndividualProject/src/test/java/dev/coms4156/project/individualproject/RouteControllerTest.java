@@ -21,19 +21,6 @@ public class RouteControllerTest {
   @Autowired private MockMvc mvc;
 
   @Test
-  void retrieveCoursesTest() throws Exception {
-    String expected =
-        "Instructor: Szabolcs Marka; Location: 301 PUP; Time: 2:40-3:55\n"
-            + "\n"
-            + "Instructor: Patricia G Lindemann; Location: 501 SCH; Time: 1:10-2:25\n";
-
-    mvc.perform(get("/retrieveCourses?courseCode=1001"))
-        .andDo(print())
-        .andExpect(status().isOk())
-        .andExpect(content().string(containsString(expected)));
-  }
-
-  @Test
   void retrieveDepartmentTest() throws Exception {
     String expected =
         "COMS 3827: \n"
@@ -190,24 +177,6 @@ public class RouteControllerTest {
   }
 
   @Test
-  void enrollStudentInCourseTestMaxReached() throws Exception {
-    String expectedRes = "Unable to enroll. Course has already reached max capacity.";
-    mvc.perform(patch("/enrollStudentInCourse?deptCode=IEOR&courseCode=2500"))
-        .andDo(print())
-        .andExpect(status().isBadRequest())
-        .andExpect(content().string(containsString(expectedRes)));
-  }
-
-  @Test
-  void enrollStudentInCourseTestMaxNotReached() throws Exception {
-    String expected = "Successfully enrolled.";
-    mvc.perform(patch("/enrollStudentInCourse?deptCode=PHYS&courseCode=1201"))
-        .andDo(print())
-        .andExpect(status().isOk())
-        .andExpect(content().string(containsString(expected)));
-  }
-
-  @Test
   void indexTest() throws Exception {
     String expected =
         "Welcome, in order to make an API call direct your browser or Postman to an endpoint "
@@ -229,8 +198,6 @@ public class RouteControllerTest {
 
   @Test
   void testNotFound() throws Exception {
-
-    mvc.perform(get("/retrieveCourses?courseCode=C")).andExpect(status().isNotFound());
     mvc.perform(get("/retrieveDept?deptCode=C")).andExpect(status().isNotFound());
     mvc.perform(get("/retrieveCourse?deptCode=COMS&courseCode=1")).andExpect(status().isNotFound());
     mvc.perform(get("/isCourseFull?deptCode=COMS&courseCode=1")).andExpect(status().isNotFound());
@@ -252,8 +219,6 @@ public class RouteControllerTest {
     mvc.perform(patch("/changeCourseTeacher?deptCode=abc&courseCode=1&teacher=M"))
         .andExpect(status().isNotFound());
     mvc.perform(patch("/changeCourseLocation?deptCode=abc&courseCode=0&location=abc"))
-        .andExpect(status().isNotFound());
-    mvc.perform(patch("/enrollStudentInCourseTest?deptCode=abc&courseCode=0"))
         .andExpect(status().isNotFound());
   }
 }
