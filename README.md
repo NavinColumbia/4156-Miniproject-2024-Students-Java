@@ -1,16 +1,59 @@
-COMS W4156 Advanced Software Engineering
+    COMS W4156 Advanced Software Engineering
 
-Mini Project 2024
+    Mini Project 2024
 
-Name: Navinashok Swaminathan
-UserName: NavinColumbia
-UNI: ns3886
-email: ns3886@columbia.edu
-branch: main 
-Link: https://github.com/NavinColumbia/4156-Miniproject-2024-Students-Java.git
+    Name: Navinashok Swaminathan
+    UserName: NavinColumbia
+    UNI: ns3886
+    email: ns3886@columbia.edu
+    branch: main 
+    Link: https://github.com/NavinColumbia/4156-Miniproject-2024-Students-Java.git
 
 
-Individual Assignment 1: Testing and Bug Fixing 
+    Individual Assignment 2: Feature Implementation and Maintenance 
+         
+        Pre-Requisite:
+            Please Follow Basic Instructions under 'Individual Assignment 1: Testing and Bug Fixing'  
+            in README.md for setup and review
+         
+        0)Reminder of Required Documentation:
+                a. honesty.txt and citations.txt can be found at root level of the repo
+
+        1) Feature A Implementation:
+            /retrieveCourses endpoint has been created.
+                a. RouteController.java has the relevant method implementation
+                b. RouteControllerTest.java has the relevant test for the same
+                c. PostMan Testing Screenshot attached in pull request for the GET method
+
+        2) Feature B Implementation:
+            /enrollStudentInCourse endpoint has been created. 
+                a. RouteController.java has the relevant method implementation
+                b. RouteControllerTest.java has the relevant test for the same
+                c.PostMan Testing Screenshot attached in pull request for the PATCH method
+
+
+        3. Maintaining the Codebase:
+            a. bugs.txt under "Further Robustness Improvements" discusses robustness enhancements.
+            b. new tests have been written for the code changes
+            c. style check have been done
+
+        4.Submission:
+            Submission Details:
+                Assignment 2:
+                Name: Navinashok Swaminathan
+                UserName: NavinColumbia
+                UNI: ns3886
+                email: ns3886@columbia.edu
+                branch: main
+                Link: https://github.com/NavinColumbia/4156-Miniproject-2024-Students-Java.git
+                Pull Request Has ScreenShots
+
+
+                
+                
+                
+            
+    Individual Assignment 1: Testing and Bug Fixing 
 
         0)Set-up:
                 if data.txt doesn't exist in IndividualProject:

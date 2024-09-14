@@ -26,6 +26,53 @@ public class RouteController {
   }
 
   /**
+   * Assignment I2 - /retrieveCourses endpoint - Feature A Implementation.
+   *
+   * @param courseCode A {@code String} representing the courseCode for which the user wishes to
+   *     retrieve.
+   * @return A {@code ResponseEntity} String representation of all the courses with the specified
+   *     course code and HTTP 200 response or, an appropriate message indicating the proper
+   *     response.
+   */
+  @GetMapping(value = "/retrieveCourses", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<?> retrieveCourses(@RequestParam String courseCode) {
+    try {
+
+      Map<String, Department> departmentMapping;
+      departmentMapping = IndividualProjectApplication.myFileDatabase.getDepartmentMapping();
+      Map<String, Course> coursesMapping;
+      StringBuilder response = new StringBuilder();
+      int found = 0;
+
+      for (Map.Entry<String, Department> entry : departmentMapping.entrySet()) {
+
+        Department dept = entry.getValue();
+        coursesMapping = dept.getCourseSelection();
+        for (Map.Entry<String, Course> courseEntry : coursesMapping.entrySet()) {
+
+          String entryCourseCode = courseEntry.getKey();
+          Course mapCourse = courseEntry.getValue();
+          if (entryCourseCode.equals(courseCode)) {
+            found++;
+            response.append(mapCourse.toString() + "\n");
+          }
+        }
+      }
+
+      if (found == 0) {
+        String res = "No Course was Found with course code :  " + courseCode;
+        return new ResponseEntity<>(res, HttpStatus.NOT_FOUND);
+      } else {
+
+        return new ResponseEntity<>(response.toString(), HttpStatus.OK);
+      }
+
+    } catch (Exception e) {
+      return handleException(e);
+    }
+  }
+
+  /**
    * Returns the details of the specified department.
    *
    * @param deptCode A {@code String} representing the department the user wishes to retrieve.
@@ -494,6 +541,43 @@ public class RouteController {
         Course requestedCourse = coursesMapping.get(Integer.toString(courseCode));
         requestedCourse.reassignLocation(location);
         return new ResponseEntity<>("Attributed was updated successfully.", HttpStatus.OK);
+      } else {
+        return new ResponseEntity<>("Course Not Found", HttpStatus.NOT_FOUND);
+      }
+    } catch (Exception e) {
+      return handleException(e);
+    }
+  }
+
+  /**
+   * Assignment 2 - enroll Student in course.
+   *
+   * @param deptCode A {@code String} representing the department containing the course.
+   * @param courseCode A {@code int} representing the course for which student has to be enrolled.
+   * @return A {@code ResponseEntity} object containing an HTTP 200 response or, an appropriate
+   *     message indicating the proper response.
+   */
+  @PatchMapping(value = "/enrollStudentInCourse", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<?> enrollStudentInCourse(
+      @RequestParam String deptCode, @RequestParam int courseCode) {
+    try {
+      boolean doesCourseExists;
+      doesCourseExists = retrieveCourse(deptCode, courseCode).getStatusCode() == HttpStatus.OK;
+
+      if (doesCourseExists) {
+        Map<String, Department> departmentMapping;
+        departmentMapping = IndividualProjectApplication.myFileDatabase.getDepartmentMapping();
+        Map<String, Course> coursesMapping;
+        coursesMapping = departmentMapping.get(deptCode).getCourseSelection();
+
+        Course requestedCourse = coursesMapping.get(Integer.toString(courseCode));
+        boolean status = requestedCourse.enrollStudent();
+        if (!status) {
+          return new ResponseEntity<>(
+              "Unable to enroll. Course has already reached max capacity.", HttpStatus.BAD_REQUEST);
+        } else {
+          return new ResponseEntity<>("Successfully enrolled.", HttpStatus.OK);
+        }
       } else {
         return new ResponseEntity<>("Course Not Found", HttpStatus.NOT_FOUND);
       }

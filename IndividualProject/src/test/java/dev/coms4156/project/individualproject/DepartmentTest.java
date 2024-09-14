@@ -1,6 +1,7 @@
 package dev.coms4156.project.individualproject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -80,5 +81,14 @@ public class DepartmentTest {
     testDept2.addPersonToMajor();
     testDept2.dropPersonFromMajor();
     assertEquals(1, testDept2.getNumberOfMajors());
+  }
+
+  @Test
+  public void illegalArgumentTestDepartment() {
+    IllegalArgumentException exception =
+        assertThrows(IllegalArgumentException.class, () -> new Department(null, null, null, -1));
+
+    assertEquals(
+        " Department not created, Arguments should not be null or <0 ", exception.getMessage());
   }
 }

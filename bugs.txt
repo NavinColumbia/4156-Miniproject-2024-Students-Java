@@ -65,4 +65,16 @@ E. RouteController.java
 
 
 
+Further Robustness Improvements
+(Assignment 2 - Part 3 : Maintaining Code Base):
+
+A good chunk of robustness issues were identified as part of Assignment 1 - Identifying Bugs
+(such as usage of this keyword, etc)
+
+Further Enhancements:
+
+1) IllegalArgumentException is thrown in constructor of Course and Department incase of insufficient arguments
+    (example : say if course capacity is 0)
+2) NullPointerException is thrown in Department.addCourse() if courses is null
+3) Tests have been written for the same
 
