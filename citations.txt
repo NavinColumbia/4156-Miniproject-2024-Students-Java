@@ -1,6 +1,5 @@
 Assignment Instructions :
     https://courseworks2.columbia.edu/courses/203184/assignments/1283340
-    https://courseworks2.columbia.edu/courses/203184/assignments/1283341
 Basic Repo Set Up:
     Fork from https://github.com/Programming-Systems-Lab/4156-Miniproject-2024-Students-Java.git 
 

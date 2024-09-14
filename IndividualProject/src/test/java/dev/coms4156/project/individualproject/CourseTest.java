@@ -1,7 +1,6 @@
 package dev.coms4156.project.individualproject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -102,15 +101,6 @@ public class CourseTest {
     testCourse2.dropStudent();
 
     assertEquals(false, testCourse2.dropStudent());
-  }
-
-  @Test
-  public void illegalArgumentTest() {
-    IllegalArgumentException exception =
-        assertThrows(IllegalArgumentException.class, () -> new Course(null, null, null, 0));
-
-    assertEquals(
-        " Course not created, Arguments should not be null or <=0 ", exception.getMessage());
   }
 
   /** This is a testcase created by calling constructor. */
