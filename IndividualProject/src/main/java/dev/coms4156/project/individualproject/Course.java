@@ -18,6 +18,10 @@ public class Course implements Serializable {
    * @param capacity The maximum number of students that can enroll in the course.
    */
   public Course(String instructorName, String courseLocation, String timeSlot, int capacity) {
+    if (capacity <= 0 || courseLocation == null || timeSlot == null || instructorName == null) {
+      throw new IllegalArgumentException(
+          " Course not created, Arguments should not be null or <=0 ");
+    }
     this.courseLocation = courseLocation;
     this.instructorName = instructorName;
     this.courseTimeSlot = timeSlot;
@@ -135,7 +139,7 @@ public class Course implements Serializable {
    * @return true if enrolledStudentCount is equal to or exceeds enrollmentCapacity.
    */
   public boolean isCourseFull() {
-    return enrollmentCapacity <= enrolledStudentCount;
+    return enrollmentCapacity <= this.enrolledStudentCount;
   }
 
   @Serial private static final long serialVersionUID = 123456L;

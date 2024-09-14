@@ -20,6 +20,10 @@ public class Department implements Serializable {
    */
   public Department(
       String deptCode, Map<String, Course> courses, String departmentChair, int numberOfMajors) {
+    if (deptCode == null || courses == null || departmentChair == null || numberOfMajors < 0) {
+      throw new IllegalArgumentException(
+          " Department not created, Arguments should not be null or <0 ");
+    }
     this.courses = courses;
     this.departmentChair = departmentChair;
     this.numberOfMajors = numberOfMajors;
@@ -73,6 +77,9 @@ public class Department implements Serializable {
    * @param course The Course object to add.
    */
   public void addCourse(String courseId, Course course) {
+    if (courses == null) {
+      throw new NullPointerException("Courses is null");
+    }
     this.courses.put(courseId, course);
   }
 
@@ -102,6 +109,9 @@ public class Department implements Serializable {
    */
   @Override
   public String toString() {
+    if (courses == null) {
+      throw new NullPointerException("Courses is null");
+    }
     StringBuilder result = new StringBuilder();
     for (Map.Entry<String, Course> entry : this.courses.entrySet()) {
       String key = entry.getKey();
